@@ -23,4 +23,12 @@ Not yet registered on bower and npm.
 <script type="text/javascript" src="notification/dist/gos-notification-dist.js"></script>
 ```
 
+Development
+----------
+
+```cmd
+npm install --dev
+npm run watchify
+```
+
 **This is currently in progress, there are still a lot of work !**
