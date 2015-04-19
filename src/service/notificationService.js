@@ -1,18 +1,7 @@
 'use strict';
 
-module.exports = function($rootScope){
-    this.websocketURI = null;
+module.exports = function($rootScope, configs){
     this.websocket = null;
-    this.notificationStack = [];
-
-    this.notificationCallback = function(topic, payload){
-
-        //Send event to notify other service that receive a new notification
-        $rootScope.$broadcast('notification:new', {
-            topic: topic,
-            payload: payload
-        });
-    };
 
     this.fetch = function(session, route, start, end, successCb){
         var _this = this;
@@ -26,5 +15,18 @@ module.exports = function($rootScope){
         }).then(successCb, function(error) {
             console.log(error);
         });
-    }
+    };
+
+    $rootScope.$on('ws:connect', function(event, session){
+        var channels = configs.channels;
+
+        for(var i in channels) {
+            session.subscribe(channels[i], function(uri, payload){
+                $rootScope.$broadcast('notification:new', {
+                    uri: uri,
+                    notification: JSON.parse(payload)
+                });
+            });
+        }
+    });
 };
