@@ -58,7 +58,7 @@ gulp.task('less', function() {
         .pipe(gulp.dest(DIST_DIR))
 });
 
-gulp.task('js', function (){
+gulp.task('browserify', function (){
     return bundle();
 });
 
@@ -72,3 +72,6 @@ gulp.task('watch', function(){
         gulp.run('less');
     });
 });
+
+gulp.task('default', ['watch']);
+gulp.task('serve', ['browserify', 'less']);
