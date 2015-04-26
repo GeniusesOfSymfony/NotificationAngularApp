@@ -21,6 +21,7 @@ var coffeeify = require('coffeeify');
 const OUTPUT_FILE_NAME = 'gos-notification.min.js';
 const ENTRY_FILE = './src/gos-notification.coffee';
 const DIST_DIR = './dist';
+const STYLE_DIR = './src/style'
 
 var bundler = browserify({
     entries: [ENTRY_FILE],
@@ -47,7 +48,7 @@ var bundle = function(){
 };
 
 gulp.task('less', function() {
-    gulp.src('./src/style/*.less')
+    gulp.src(STYLE_DIR + '*.less')
         .pipe(less())
         .pipe(autoprefix('last 2 version', 'ie 8', 'ie 9'))
         .pipe(minifyCSS({
@@ -67,7 +68,7 @@ gulp.task('watch', function(){
 
     bundle();
 
-    gulp.watch('./src/style/*.less', function(){
+    gulp.watch(STYLE_DIR + '*.less', function(){
         gulp.run('less');
     });
 });
