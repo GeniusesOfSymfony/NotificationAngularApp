@@ -7,6 +7,5 @@ module.exports = ['$scope', '$rootScope', ($scope, $rootScope) ->
         $scope.open = !$scope.open
         $rootScope.$broadcast 'board:display', $scope.open
         return
-
     return
 ]
