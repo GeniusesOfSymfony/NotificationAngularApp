@@ -7,7 +7,6 @@ var browserSync = require('browser-sync');
 var autoprefix = require('gulp-autoprefixer');
 var coffee = require('gulp-coffee');
 var browserify = require('browserify');
-var concat = require('gulp-concat');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var gutil = require('gulp-util');
@@ -40,7 +39,6 @@ var bundle = function(){
         .pipe(gulpif(!argv.production, sourcemaps.init({loadMaps: true})))
         .pipe(gulpif(!argv.production, sourcemaps.write('./')))
         .pipe(gulpif(argv.production, uglify()))
-        .pipe(concat(OUTPUT_FILE_NAME))
         .pipe(gulp.dest(DIST_DIR));
 
     gutil.log("Updated JavaScript sources");
